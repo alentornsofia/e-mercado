@@ -18,11 +18,12 @@
 <body>
   <nav class="site-header sticky-top py-1 bg-dark">
     <div class="container d-flex flex-column flex-md-row justify-content-between">
-      <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
+      <a class="py-2 d-none d-md-inline-block" href="inicio.html">Inicio</a>
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
       <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+      <div id="mostrarUsuario" class="py-2 d-none d-md-inline-block usuarioNav"></div>
     </div>
   </nav>
   
@@ -32,9 +33,56 @@
     <div class="text-center p-4">
 
       <h2>Productos</h2>
-            <p class="lead">Verás aquí todos los Productos del sitio.</p>
+            <p class="lead">Verás aquí todos los productos del sitio.</p>
         </div> 
 
+<!-- ORDENAR PRECIO ASCENDENTE Y DESCENDENTE //RELEVANCIA -->
+ <div class="container">
+<div class="row">
+
+  <div class="col text-right">
+      
+    <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
+          <label class="btn btn-light active" id="ascendente" >      <!--ASCENDENTE-->
+              <input type="radio" name="options" autocomplete="off" checked>Precio menor a mayor
+          </label>
+          <label class="btn btn-light" id="descendente" >      <!--DESCENDENTE-->
+              <input type="radio" name="options" autocomplete="off">Precio mayor a menor
+          </label>
+          <label class="btn btn-light" id="relevancia" >       <!--RELEVANCIA-->
+              <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i>Relevancia
+          </label>
+      </div>
+  </div>
+</div>
+
+
+
+<!-- FILTRO INGRESAR PRECIO-->
+        <div class="row justify-content-end">
+          <div class="col-md-6"></div>
+            <div class="col-md-6 col-sm-12 mb-1 container">
+              <div class="row container p-0 m-0">
+                <div class="col">
+                  <p class="font-weight-normal text-right my-2">Precio</p>
+                </div>
+                <div class="col">
+                  <input class="form-control" type="number" placeholder="min." id="precioMinimo"> <!--CAMPO PRECIO MINIMO-->
+                </div>
+                <div class="col">
+                  <input class="form-control" type="number" placeholder="máx." id="precioMaximo"><!--CAMPO PRECIO MAXIMO-->
+                </div>
+                <div class="col-3 p-0">
+                  <div class="btn-group" role="group">
+                    <button class="btn btn-light btn-block" id="filtrar">Filtrar</button><!--BOTON FILTRAR-->
+                    <button class="btn btn-link btn-sm" id="limpiar">Limpiar</button><!--BOTON LIMPIAR-->
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+      </div>
 
 <!-- PRODUCTOS  -->
 

@@ -1,40 +1,144 @@
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function (e) {
+const ASCENDENTE = "AZ";
+const DESCENDENTE = "ZA";
+const RELEVANCIA = "Relevancia";
+var arrayProductos = [];
+var criterioActual = undefined;
+var minCount = undefined;
+var maxCount = undefined;
 
-    function cargarProductos(url) {
+//FUNCION PARA ORDENAR PRODUCTOS POR CRITERIO
+function sortProductos(criterio, array) {
+    let result = [];
+    if (criterio === ASCENDENTE) {                         //ASCENDENTE
+        result = array.sort(function (a, b) {
+            if (a.cost < b.cost) { return -1; }
+            if (a.cost > b.cost) { return 1; }
+            return 0;
+        });
+    } else if (criterio === DESCENDENTE) {               //ASCENDENTE
+        result = array.sort(function (a, b) {
+            if (a.cost > b.cost) { return -1; }
+            if (a.cost < b.cost) { return 1; }
+            return 0;
+        });
+    } else if (criterio === RELEVANCIA) {                //RELEVANCIA
+        result = array.sort(function (a, b) {
+            let aCount = a.soldCount;
+            let bCount = b.soldCount;
 
-        fetch(url)
-            .then(respuesta => respuesta.json())
+            if (aCount > bCount) { return -1; }
+            if (aCount < bCount) { return 1; }
+            return 0;
+        });
+    }
 
-            .then(datos => {
-                for (i = 0; i < datos.length; i++) {
+    return result;
+}
 
-                    let productos = document.getElementById("listaproductos");
-                    productos.innerHTML += `
+//FUNCION PARA MOSTRAR PRODUCTOS EN PANTALLA
+function mostrarProductos() {
+    let htmlContentToAppend = "";
+    for (i = 0; i < arrayProductos.length; i++) {
 
-                
+        let category = arrayProductos[i];
+
+        if (((minCount == undefined) || (minCount != undefined && parseInt(category.cost) >= minCount)) &&
+            ((maxCount == undefined) || (maxCount != undefined && parseInt(category.cost) <= maxCount))) {
+            htmlContentToAppend += `
+            
                     <div class="row">
                         <div class="col-3">
-                        <img src=" `+ datos[i].imgSrc +  `" class="img-thumbnail">
+                        <img src=" `+ category.imgSrc + `" class="img-thumbnail">
                         </div>
-                        <div class="col">
+                        <div class="col list-group-item list-group-item-action">
                             <div class="d-flex w-100 justify-content-between">
-                                <h4 class="mb-1">`+ datos[i].name +`</h4>
+                                <h4 class="mb-1">`+ category.name +
+                `</h4> <small class="text-muted">` + category.soldCount + ` artículos</small>
                                 
                             </div>
-                            <p class="mb-1">Precio: U$S `+ datos[i].cost + ` </p>
-                            <p class="mb-1">` + datos[i].description + `</p>
+                            <p class="mb-1">` + category.currency + ` ` + category.cost + ` </p>
+                            <p class="mb-1">` + category.description + `</p>
                         </div>
                     </div>
                 
                 `
+        }
+        document.getElementById("listaproductos").innerHTML = htmlContentToAppend;
 
-                }
-                
-            });
-           
     }
-    cargarProductos(PRODUCTS_URL);
+}
+
+//FUNCION PARA FILTRAR LOS PRODUCTOS
+function filtrarProductos(criterio, array) {
+    criterioActual = criterio;
+
+    if (array != undefined) {
+        arrayProductos = array;
+    }
+
+    //ACÁ GUARDO EN LA VARIABLE ARRAYPRODUCTOS EL RESULTADO DE LA FUNCION SEGUN CRITERIO
+    arrayProductos = sortProductos(criterioActual, arrayProductos);  //MODIFICACION DEL ARRAY POR CRITERIO
+
+    //Muestro las categorías ordenadas
+    mostrarProductos();
+};
+
+
+//GETJSONDATA
+document.addEventListener("DOMContentLoaded", function (e) {
+    getJSONData(PRODUCTS_URL).then(function (resultObj) {
+        if (resultObj.status === "ok") {
+            filtrarProductos(ASCENDENTE, resultObj.data);
+        }
+    });
+
+    document.getElementById("ascendente").addEventListener("click", function () {    //LLAMADO A FUNCIÓN ASCENDENTE
+        filtrarProductos(ASCENDENTE);
+    });
+
+    document.getElementById("descendente").addEventListener("click", function () {    //LLAMADO A FUNCIÓN DESCENDENTE
+        filtrarProductos(DESCENDENTE);
+    });
+
+    document.getElementById("relevancia").addEventListener("click", function () {     //LLAMADO A FUNCIÓN RELEVANCIA
+        filtrarProductos(RELEVANCIA);
+    });
+
+
+    //LIMPIAR FILTROS
+    document.getElementById("limpiar").addEventListener("click", function () {
+        document.getElementById("precioMinimo").value = "";
+        document.getElementById("precioMaximo").value = "";
+
+        minCount = undefined;
+        maxCount = undefined;
+
+        mostrarProductos();     //VUELVE A MOSTRAR TODOS LOS PRODUCTOS
+    });
+
+
+    document.getElementById("filtrar").addEventListener("click", function () {     //PRECIO MINIMO - PRECIO MAXIMO
+        //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
+        //de productos por categoría.
+        minCount = document.getElementById("precioMinimo").value;  //LE ASIGNO A LAS VARIABLES EL VALOR ASIGNADO POR EL USUARIO
+        maxCount = document.getElementById("precioMaximo").value;
+
+        if ((minCount != undefined) && (minCount != "") && (parseInt(minCount)) >= 0) {
+            minCount = parseInt(minCount); 
+        }
+        else {
+            minCount = undefined;
+        }
+
+        if ((maxCount != undefined) && (maxCount != "") && (parseInt(maxCount)) >= 0) {
+            maxCount = parseInt(maxCount);
+        }
+        else {
+            maxCount = undefined;
+        }
+
+        mostrarProductos();
+    });
+
+
 });

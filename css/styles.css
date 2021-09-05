@@ -139,3 +139,14 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+.empty {
+  background-color:lightgray;
+}
+
+.usuarioNav {
+
+  color: white;
+  display: none;
+
+}
