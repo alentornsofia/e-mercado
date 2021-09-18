@@ -13,6 +13,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -26,14 +27,51 @@
       <div id="mostrarUsuario" class="py-2 d-none d-md-inline-block usuarioNav"></div>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 3 (Fecha de entrega: 19/09/2021) y Entrega 4 (Fecha de entrega: 03/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
-    </div>
+
+<!-- INFO PRODUCTO-->
+  <div class="container">
+
+    <div class="row">
+      <div class="list-group" id="infoproducto">
+      </div>
+     </div>
   </div>
+
+
+  <!--COMENTARIO-->
+  <div class="container">
+    <h5 class="text-center p-4">Comentarios sobre este producto</h5>
+
+    <div class="row">
+      <div class="list-group" id="comentario">
+      </div>
+     </div>
+  </div>
+
+
+    <!--AGREGAR UN COMENTARIO-->
+
+
+<div class="container">
+
+  <div class="row">
+    <div class="list-group" id="nuevoComentario" style="display: none;">
+
+      <textarea id="nuevoCom" class="form-control"  cols="70" rows="5" placeholder="Añade un comentario"></textarea> <br>
+      <div id="estrellas"></div>
+      <br>
+      <button id="enviarComentario">Enviar comentario</button>
+
+    </div>
+   </div>
+</div>
+
+
+
+
+
+
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-right">

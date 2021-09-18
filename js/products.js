@@ -45,12 +45,13 @@ function mostrarProductos() {
         if (((minCount == undefined) || (minCount != undefined && parseInt(category.cost) >= minCount)) &&
             ((maxCount == undefined) || (maxCount != undefined && parseInt(category.cost) <= maxCount))) {
             htmlContentToAppend += `
-            
+            <a href ="product-info.html"
+            <div class= "col list-group-item list-group-item-action" >
                     <div class="row">
                         <div class="col-3">
                         <img src=" `+ category.imgSrc + `" class="img-thumbnail">
                         </div>
-                        <div class="col list-group-item list-group-item-action">
+                        <div class="col  list-group-item-action">
                             <div class="d-flex w-100 justify-content-between">
                                 <h4 class="mb-1">`+ category.name +
                 `</h4> <small class="text-muted">` + category.soldCount + ` artículos</small>
@@ -60,7 +61,8 @@ function mostrarProductos() {
                             <p class="mb-1">` + category.description + `</p>
                         </div>
                     </div>
-                
+                </div>
+                </a>
                 `
         }
         document.getElementById("listaproductos").innerHTML = htmlContentToAppend;
