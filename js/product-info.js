@@ -196,7 +196,8 @@ let nuevoComentario = {                          //CREO UN OBJETO NUEVO QUE CONT
 
         user : JSON.parse(localStorage.getItem('User-Logged')).email,      //NOMBRE DE USUARIO EN LOCAL STORAGE
         description : document.getElementById("nuevoCom").value,           //VALUE DEL TEXTAREA 
-        score : getRating()                                                //FUNCIÓN PARA PUNTUAR COMENTARIO
+        score : getRating() ,
+        dateTime  : JSON.stringify(new Date())                               //FUNCIÓN PARA PUNTUAR COMENTARIO
 }
 
 if (document.getElementById("nuevoCom").value != "") {      //AGREGO CONDICIÓN, SI EL TEXTAREA TIENE ALGUN VALOR
