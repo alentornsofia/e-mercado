@@ -1,11 +1,18 @@
 const CATEGORIES_URL = "https://japdevdep.github.io/ecommerce-api/category/all.json";
 const PUBLISH_PRODUCT_URL = "https://japdevdep.github.io/ecommerce-api/product/publish.json";
 const CATEGORY_INFO_URL = "https://japdevdep.github.io/ecommerce-api/category/1234.json";
-const PRODUCTS_URL = "https://japdevdep.github.io/ecommerce-api/product/all.json";
-const PRODUCT_INFO_URL = "https://japdevdep.github.io/ecommerce-api/product/5678.json";
+const PRODUCTS_URL = "https://alentornsofia.github.io/jsonsinfoprod/PRODUCTS.json";
 const PRODUCT_INFO_COMMENTS_URL = "https://japdevdep.github.io/ecommerce-api/product/5678-comments.json";
 const CART_INFO_URL = "https://japdevdep.github.io/ecommerce-api/cart/987.json";
 const CART_BUY_URL = "https://japdevdep.github.io/ecommerce-api/cart/buy.json";
+const PROD1 = "https://alentornsofia.github.io/jsonsinfoprod/1.json"
+const PROD2 = "https://alentornsofia.github.io/jsonsinfoprod/2.json"
+const PROD3 = "https://alentornsofia.github.io/jsonsinfoprod/3.json"
+const PROD4 = "https://alentornsofia.github.io/jsonsinfoprod/4.json"
+
+
+
+
 
 var showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";

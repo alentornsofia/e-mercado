@@ -1,10 +1,6 @@
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
+var listaComentarios;     //VARIABLE PARA ARRAY DE COMENTARIOS
 
-var listaComentarios;
-
-function mostrarProductos(producto) {
+function mostrarProductos(producto) {           //FUNCIÓN PARA MOSTRAR DATOS DEL PRODUCTO -- titulo-imagen-precio-desripción
 
     let info = "";
 
@@ -16,7 +12,7 @@ function mostrarProductos(producto) {
   <br>    <h2>`+ producto.name + `</h2> <br>
 
         </div> 
-<div class="row">
+<div class="row">                                                     
         <div class="w-50">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -47,13 +43,10 @@ function mostrarProductos(producto) {
           <span class="sr-only">Next</span>
         </a>
       </div>
-
-
       </div>
 
       <div class= "w-50 col list-group-item list-group-item-action">
-            
-         
+                  
                 <div class="col list-group-item-action">    
                 <br>   <h4 class="mb-1">` + producto.currency + ` ` + producto.cost + ` </h4> <br> <br>
                     <p class="mb-1">` + producto.description + `</p>
@@ -61,12 +54,12 @@ function mostrarProductos(producto) {
             </div>
             </div>
 
-            <p class= "p-4">Deslizá para ver las imágenes</p>
+            <p class= "p-4">Desliza para ver las imágenes</p>
 
        </div>`
 
 
-    document.getElementById("infoproducto").innerHTML = info;
+    document.getElementById("infoproducto").innerHTML = info;         //CARGO LA INFORMACIÓN AL DIV EN HTML
 
 }
 
@@ -74,7 +67,7 @@ function mostrarProductos(producto) {
 //MOSTRAR COMENTARIOS
 function mostrarComentarios(comentarios) {
 
-    let listaComentarios = "";
+    let listaComentarios = "";          //variable de comentarios vacía
 
 
     comentarios.forEach(function (comentario) {
@@ -82,7 +75,7 @@ function mostrarComentarios(comentarios) {
 
 
 
-        for (let i = 1; i <= comentario.score; i++) {
+        for (let i = 1; i <= comentario.score; i++) {              //ITERACIÓN PARA SUMAR ESTRELLAS SEGÚN PUNTAJE
             puntaje += `<span class="fa fa-star checked"></span>`;
 
         }
@@ -93,21 +86,21 @@ function mostrarComentarios(comentarios) {
 
         }
 
-        listaComentarios +=
-            `
-       
+        listaComentarios +=            //AGREGO A LA LISTA DE COMENTARIOS LOS DATOS Y EL PUNTAJE
+            `  
 <div class= "col list-group-item-action">
        <div>
        
            <div>
                <div>
-                   <h4>`+ comentario.user + `</h4> 
+                   <h5>`+ comentario.user + `</h5>
  <small class="text-muted">` + comentario.dateTime + `</small>
                    
                
                <p>` + comentario.description + `</p> 
-           
-           <div>${puntaje}</div>
+          
+    
+           <div >${puntaje}</div>
            </div>
            </div>
        </div>
@@ -116,25 +109,52 @@ function mostrarComentarios(comentarios) {
 
     })
 
-    document.getElementById("comentario").innerHTML = listaComentarios;
+    document.getElementById("comentario").innerHTML = listaComentarios;               //AGREGO EL ARRAY QUE ACABO DE FORMAR AL HTML
 
 
 }
 
 
-
-
-//MOSTRAR INFO PRODUCTO
+//MOSTRAR CADA PRODUCTO
 
 document.addEventListener("DOMContentLoaded", function (e) {
 
-    getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
+
+    if (JSON.parse(localStorage.getItem('id')).prodId == 1)        //SI EL ID DEL LOCAL STORAGE CORRESPONDE A 1
+
+    getJSONData(PROD1).then(function (resultObj) {                 //PASO POR PARÁMETRO LA URL DEL JSON ESPECÍFICO
         if (resultObj.status === "ok") {
 
             mostrarProductos(resultObj.data);
         }
     });
 
+    if (JSON.parse(localStorage.getItem('id')).prodId == 2)
+
+    getJSONData(PROD2).then(function (resultObj) {
+        if (resultObj.status === "ok") {
+
+            mostrarProductos(resultObj.data);
+        }
+    });
+
+    if (JSON.parse(localStorage.getItem('id')).prodId == 3)
+
+    getJSONData(PROD3).then(function (resultObj) {
+        if (resultObj.status === "ok") {
+
+            mostrarProductos(resultObj.data);
+        }
+    });
+
+    if (JSON.parse(localStorage.getItem('id')).prodId == 4)
+
+    getJSONData(PROD4).then(function (resultObj) {
+        if (resultObj.status === "ok") {
+
+            mostrarProductos(resultObj.data);
+        }
+    });
 
 });
 
@@ -144,11 +164,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 document.addEventListener("DOMContentLoaded", function (e) {
 
-    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {
+    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {      //TRAIGO LA URL QUE CONTIENE LOS COMENTARIOS
         if (resultObj.status === "ok") {
 
             listaComentarios = resultObj.data
-            mostrarComentarios(listaComentarios);
+            mostrarComentarios(listaComentarios);                           //LE PASO POR PARÁMETRO LA VARIABLE GLOBAL
         }
     });
 
@@ -156,45 +176,42 @@ document.addEventListener("DOMContentLoaded", function (e) {
 });
 
 
-
 //MOSTRAR CONTROLES DE COMENTARIO SI EL USUARIO ESTA LOGUEADO
 
 document.addEventListener("DOMContentLoaded", function (e) {
 
-
-
-    let userLogged = localStorage.getItem('User-Logged');
+    let userLogged = localStorage.getItem('User-Logged');            //TRAIGO EL ITEM DEL LOCAL STORAGE
     if (userLogged) {
-        document.getElementById("nuevoComentario").style = "display: inline-block"
+        document.getElementById("nuevoComentario").style = "display: inline-block"         //SI EL USUARIO ESTÁ LOGUEADO MODIFICO EL DISPLAY
     }
 
 });
 
 
-
 //AGREGAR COMENTARIO NUEVO A LISTA DE COMENTARIOS
 
-document.getElementById("enviarComentario").addEventListener("click", function(){
+document.getElementById("enviarComentario").addEventListener("click", function(){      //BOTON PARA ENVIAR COMENTARIO
 
-let nuevoComentario = {
+let nuevoComentario = {                          //CREO UN OBJETO NUEVO QUE CONTENGA LOS DATOS DEL NUEVO COMENTARIO
 
-        user : JSON.parse(localStorage.getItem('User-Logged')).email,
-        description : document.getElementById("nuevoCom").value,
-        score : getRating()
+        user : JSON.parse(localStorage.getItem('User-Logged')).email,      //NOMBRE DE USUARIO EN LOCAL STORAGE
+        description : document.getElementById("nuevoCom").value,           //VALUE DEL TEXTAREA 
+        score : getRating()                                                //FUNCIÓN PARA PUNTUAR COMENTARIO
 }
 
-listaComentarios.push(nuevoComentario);
+if (document.getElementById("nuevoCom").value != "") {      //AGREGO CONDICIÓN, SI EL TEXTAREA TIENE ALGUN VALOR
 
-mostrarComentarios(listaComentarios)
+listaComentarios.push(nuevoComentario);                     //AGREGO EL COMENTARIO AL ARRAY
+
+mostrarComentarios(listaComentarios)                        //LLAMO A LA FUNCION
 
 document.getElementById("nuevoCom").value = "";
 
-
+} else {
+    alert("Para poder comentar, debes escribir algo!");
+}
 
 })
-
-
-
 
 
 
@@ -217,20 +234,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
     document.getElementById("estrellas").innerHTML = `
     
     <div class="star-rating">
-    <input id="star-5" type="radio" name="rating" value="5"/>
-    <label for= "star-5" title="5 stars">
-    <i class= "active fa fa-star"></i>
-    </label>
-
-    <div class="star-rating">
-    <input id="star-4" type="radio" name="rating" value="4"/>
-    <label for= "star-4" title="4 stars">
-    <i class= "active fa fa-star"></i>
-    </label>
-
-    <div class="star-rating">
-    <input id="star-3" type="radio" name="rating" value="3"/>
-    <label for= "star-3" title="3 stars">
+    <input id="star-1" type="radio" name="rating" value="1" checked/>
+    <label for= "star-1" title="1 stars">
     <i class= "active fa fa-star"></i>
     </label>
 
@@ -241,8 +246,20 @@ document.addEventListener("DOMContentLoaded", function (e) {
     </label>
 
     <div class="star-rating">
-    <input id="star-1" type="radio" name="rating" value="1"/>
-    <label for= "star-1" title="1 stars">
+    <input id="star-3" type="radio" name="rating" value="3"/>
+    <label for= "star-3" title="3 stars">
+    <i class= "active fa fa-star"></i>
+    </label>
+
+    <div class="star-rating">
+    <input id="star-4" type="radio" name="rating" value="4"/>
+    <label for= "star-4" title="4 stars">
+    <i class= "active fa fa-star"></i>
+    </label>
+
+    <div class="star-rating">
+    <input id="star-5" type="radio" name="rating" value="5" />
+    <label for= "star-5" title="5 stars">
     <i class= "active fa fa-star"></i>
     </label>
 
@@ -253,86 +270,3 @@ document.addEventListener("DOMContentLoaded", function (e) {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*<dd>
-        <div class="row text-center text-lg-left pt-2">
-
-            <div class="col-lg-3 col-md-4 col-6">
-             <div class="d-block mb-4 h-100">
-                 <img class="img-fluid img-thumbnail" src="` + producto.images[0] + `" alt="">
-             </div>
-         </div>
-
-         <div class="col-lg-3 col-md-4 col-6">
-         <div class="d-block mb-4 h-100">
-             <img class="img-fluid img-thumbnail" src="` + producto.images[1] + `" alt="">
-         </div>
-         </div>
-
-         <div class="col-lg-3 col-md-4 col-6">
-         <div class="d-block mb-4 h-100">
-             <img class="img-fluid img-thumbnail" src="` + producto.images[2] + `" alt="">
-         </div>
-         </div>
-
-         <div class="col-lg-3 col-md-4 col-6">
-         <div class="d-block mb-4 h-100">
-             <img class="img-fluid img-thumbnail" src="` + producto.images[3] + `" alt="">
-         </div>
-         </div>
-
-         <div class="col-lg-3 col-md-4 col-6">
-         <div class="d-block mb-4 h-100">
-             <img class="img-fluid img-thumbnail" src="` + producto.images[4] + `" alt="">
-         </div>
-         </div>
-
-         </dd>
-         </div>
-         */
-
-
-
-
-
-
-/*
-
-
-
-
-         `
-
-    <div class= "col list-group-item list-group-item-action" >
-            <div class="row ">
-
-                <div class="col  list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h4 class="mb-1">`+ comentario.user +
-        `</h4> <small class="text-muted">` + comentario.dateTime + `</small>
-
-                    </div>
-                    <p class="mb-1">` + comentario.description + `</p>
-                </div>
-
-                <div style= "text-align: right;">${puntaje}</div>;
-            </div>
-        </div>`
-    */

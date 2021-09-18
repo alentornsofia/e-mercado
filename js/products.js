@@ -45,7 +45,7 @@ function mostrarProductos() {
         if (((minCount == undefined) || (minCount != undefined && parseInt(category.cost) >= minCount)) &&
             ((maxCount == undefined) || (maxCount != undefined && parseInt(category.cost) <= maxCount))) {
             htmlContentToAppend += `
-            <a href ="product-info.html"
+            <a onclick="guardarId(`+category.id+` )" style="cursor: pointer"> 
             <div class= "col list-group-item list-group-item-action" >
                     <div class="row">
                         <div class="col-3">
@@ -60,15 +60,28 @@ function mostrarProductos() {
                             <p class="mb-1">` + category.currency + ` ` + category.cost + ` </p>
                             <p class="mb-1">` + category.description + `</p>
                         </div>
+                       
                     </div>
                 </div>
+               
                 </a>
-                `
+                `          
         }
-        document.getElementById("listaproductos").innerHTML = htmlContentToAppend;
-
     }
+       
+        document.getElementById("listaproductos").innerHTML = htmlContentToAppend;
+        
+    }
+
+    
+//FUNCION PARA GUARDAR ID DEL PRODUCTO
+
+function guardarId (id) {
+
+    localStorage.setItem ('id', JSON.stringify({prodId:id}));
+    window.location = 'product-info.html'
 }
+
 
 //FUNCION PARA FILTRAR LOS PRODUCTOS
 function filtrarProductos(criterio, array) {
