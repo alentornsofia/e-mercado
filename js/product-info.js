@@ -1,4 +1,11 @@
 var listaComentarios;     //VARIABLE PARA ARRAY DE COMENTARIOS
+var arrayProductos = [];
+var infoproductos;
+var resultadoPROD1;
+var resultadoPROD2;
+var resultadoPROD3;
+var resultadoPROD4;
+
 
 function mostrarProductos(producto) {           //FUNCIÓN PARA MOSTRAR DATOS DEL PRODUCTO -- titulo-imagen-precio-desripción
 
@@ -58,13 +65,13 @@ function mostrarProductos(producto) {           //FUNCIÓN PARA MOSTRAR DATOS DE
 
        </div>`
 
-
     document.getElementById("infoproducto").innerHTML = info;         //CARGO LA INFORMACIÓN AL DIV EN HTML
 
+    
 }
 
-
 //MOSTRAR COMENTARIOS
+
 function mostrarComentarios(comentarios) {
 
     let listaComentarios = "";          //variable de comentarios vacía
@@ -115,6 +122,47 @@ function mostrarComentarios(comentarios) {
 }
 
 
+//MOSTRAR PRODUCTOS RELACIONADOS
+
+function mostrarRelacionados(array1, array2) {
+    let productosRelacionados = "";
+    for (i = 0; i < array2.length; i++) {
+
+        let elemento = array1[array2[i]];
+            productosRelacionados +=       
+           `    
+            <div class="col-md-4">
+              <a onclick="guardarId(`+elemento.id+` )" style="cursor: pointer" class="card mb-4 shadow-sm custom-card">
+                <img class="bd-placeholder-img card-img-top"  src="`+ elemento.imgSrc +`">
+                <h3 class="m-3">`+ elemento.name +`</h3>
+                <div class="card-body" style="height: 120px;" >
+                  <p class="card-text">` + elemento.description + `</p>
+                </div>
+              </a>
+            </div>`
+            
+
+
+    }
+        document.getElementById("productosrelacionados").innerHTML = productosRelacionados;
+        
+    }
+//FUNCIÓN PARA REDIRIGIR A LA PAGINA DEL PRODUCTO
+    function guardarId (id) {
+
+        localStorage.setItem ('id', JSON.stringify({prodId:id}));
+        window.location = 'product-info.html'
+    }
+
+//TRAIGO EL JSON DE PRODUCTOS
+document.addEventListener("DOMContentLoaded", function (e) {
+    getJSONData(PRODUCTS_URL).then(function (resultObj) {
+        if (resultObj.status === "ok") {
+            arrayProductos = resultObj.data;
+        }     
+        })         
+    })
+   
 //MOSTRAR CADA PRODUCTO
 
 document.addEventListener("DOMContentLoaded", function (e) {
@@ -122,42 +170,49 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
     if (JSON.parse(localStorage.getItem('id')).prodId == 1)        //SI EL ID DEL LOCAL STORAGE CORRESPONDE A 1
 
-    getJSONData(PROD1).then(function (resultObj) {                 //PASO POR PARÁMETRO LA URL DEL JSON ESPECÍFICO
-        if (resultObj.status === "ok") {
-
-            mostrarProductos(resultObj.data);
-        }
-    });
+        getJSONData(PROD1).then(function (resultObj) {                 //PASO POR PARÁMETRO LA URL DEL JSON ESPECÍFICO
+            if (resultObj.status === "ok") {
+                mostrarProductos(resultObj.data);
+                resultadoPROD1 = resultObj.data.relatedProducts;
+                mostrarRelacionados(arrayProductos, resultadoPROD1)
+            }
+        });
 
     if (JSON.parse(localStorage.getItem('id')).prodId == 2)
 
-    getJSONData(PROD2).then(function (resultObj) {
-        if (resultObj.status === "ok") {
-
-            mostrarProductos(resultObj.data);
-        }
-    });
+        getJSONData(PROD2).then(function (resultObj) {
+            if (resultObj.status === "ok") {
+                mostrarProductos(resultObj.data);
+                resultadoPROD2 = resultObj.data.relatedProducts;
+                mostrarRelacionados(arrayProductos, resultadoPROD2)
+            }
+        });
 
     if (JSON.parse(localStorage.getItem('id')).prodId == 3)
 
-    getJSONData(PROD3).then(function (resultObj) {
-        if (resultObj.status === "ok") {
+        getJSONData(PROD3).then(function (resultObj) {
+            if (resultObj.status === "ok") {
 
-            mostrarProductos(resultObj.data);
-        }
-    });
+                mostrarProductos(resultObj.data);
+                resultadoPROD3 = resultObj.data.relatedProducts;
+                mostrarRelacionados(arrayProductos, resultadoPROD3)
+
+            }
+        });
 
     if (JSON.parse(localStorage.getItem('id')).prodId == 4)
 
-    getJSONData(PROD4).then(function (resultObj) {
-        if (resultObj.status === "ok") {
+        getJSONData(PROD4).then(function (resultObj) {
+            if (resultObj.status === "ok") {
 
-            mostrarProductos(resultObj.data);
-        }
-    });
+                mostrarProductos(resultObj.data);
+                 resultadoPROD4 = resultObj.data.relatedProducts;
+                 mostrarRelacionados(arrayProductos, resultadoPROD4)
+
+            }
+        });
 
 });
-
 
 
 //MOSTRAR COMENTARIOS
@@ -190,31 +245,36 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 //AGREGAR COMENTARIO NUEVO A LISTA DE COMENTARIOS
 
-document.getElementById("enviarComentario").addEventListener("click", function(){      //BOTON PARA ENVIAR COMENTARIO
+document.getElementById("enviarComentario").addEventListener("click", function () {      //BOTON PARA ENVIAR COMENTARIO
 
-let nuevoComentario = {                          //CREO UN OBJETO NUEVO QUE CONTENGA LOS DATOS DEL NUEVO COMENTARIO
+    let nuevoComentario = {                          //CREO UN OBJETO NUEVO QUE CONTENGA LOS DATOS DEL NUEVO COMENTARIO
 
-        user : JSON.parse(localStorage.getItem('User-Logged')).email,      //NOMBRE DE USUARIO EN LOCAL STORAGE
-        description : document.getElementById("nuevoCom").value,           //VALUE DEL TEXTAREA 
-        score : getRating() ,
-        dateTime  : JSON.stringify(new Date())                               //FUNCIÓN PARA PUNTUAR COMENTARIO
-}
+        user: JSON.parse(localStorage.getItem('User-Logged')).email,      //NOMBRE DE USUARIO EN LOCAL STORAGE
+        description: document.getElementById("nuevoCom").value,           //VALUE DEL TEXTAREA 
+        score: getRating(),
+        dateTime: JSON.stringify(new Date())                               //FUNCIÓN PARA PUNTUAR COMENTARIO
+    }
 
-if (document.getElementById("nuevoCom").value != "") {      //AGREGO CONDICIÓN, SI EL TEXTAREA TIENE ALGUN VALOR
+    if (document.getElementById("nuevoCom").value != "") {      //AGREGO CONDICIÓN, SI EL TEXTAREA TIENE ALGUN VALOR
 
-listaComentarios.push(nuevoComentario);                     //AGREGO EL COMENTARIO AL ARRAY
+        listaComentarios.push(nuevoComentario);                     //AGREGO EL COMENTARIO AL ARRAY
 
-mostrarComentarios(listaComentarios)                        //LLAMO A LA FUNCION
+        mostrarComentarios(listaComentarios)                        //LLAMO A LA FUNCION
 
-document.getElementById("nuevoCom").value = "";
+        document.getElementById("nuevoCom").value = "";
 
-} else {
-    alert("Para poder comentar, debes escribir algo!");
-}
+    } else {
+        document.getElementById("alertacomentario").innerHTML += 
+        `<div class="alert alert-primary alert-dismissible" role="alert" style="width: 400px;">
+        Para poder comentar, debes escribir algo!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+      </div>`
+
+    }
 
 })
-
-
 
 //AÑADIR COMENTARIOS COMO ESTRELLAS
 
@@ -228,7 +288,6 @@ function getRating() {
 
     }
 }
-
 
 document.addEventListener("DOMContentLoaded", function (e) {
 
@@ -267,7 +326,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
     </div>
     
     `
-
 });
 
 

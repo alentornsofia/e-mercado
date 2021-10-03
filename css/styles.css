@@ -150,3 +150,19 @@ a.custom-card:hover {
   display: none;
 
 }
+
+.anav {
+  top: 50%;
+  left: 50%;
+  margin: 5px 0 0 -25px;
+  box-shadow:none;
+  
+}
+
+.ocultar {
+  display: none;
+}
+
+.mostrar {
+  display: inline-block;
+}

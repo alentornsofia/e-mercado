@@ -15,15 +15,26 @@
     <link href="css/styles.css" rel="stylesheet">
   </head>
   <body>
-    <nav class="site-header sticky-top py-1 bg-dark">
+    <nav class="site-header sticky-top py-1 bg-dark nav">
       <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2 d-none d-md-inline-block" href="inicio.html">Inicio</a>
-        <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-        <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-        <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-        <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-        <div id="mostrarUsuario" class="py-2 d-none d-md-inline-block usuarioNav"></div>
-      </div>
+        <a class="py-2 d-none d-md-inline-block anav" href="inicio.html">Inicio</a>
+        <a class="py-2 d-none d-md-inline-block anav" href="categories.html">Categorías</a>
+        <a class="py-2 d-none d-md-inline-block anav" href="products.html">Productos</a>
+        <a class="py-2 d-none d-md-inline-block anav" href="sell.html">Vender</a>
+        <a class="py-2 d-md-inline-block anav" href="index.html" id="iniciarsesion">Iniciar sesión</a>
+        <div class="dropdown d-none" id="drop">
+          <button class="btn dropdown-toggle bg-dark botonnav " type="button" id=" dropdownMenuButton " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div id="mostrarUsuario" class="py-2 d-none d-md-inline-block usuarioNav"></div>
+          </button>
+          <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="cart.html">Ver mi carrito</a>
+            <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" id="cerrarsesion" href="index.html">Cerrar sesión</a>
+          </div>
+        </div>
+        
+    </div>
     </nav>
 
 

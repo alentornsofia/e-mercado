@@ -25,7 +25,12 @@ document.getElementById("botonsubmit").addEventListener("click",function() {
         localStorage.setItem('User-Logged', JSON.stringify({email: inputEmail.value})); //Dato del email en Local Storage
         window.location = "inicio.html"          //REDIRIJO A INICIO.HTML
     } else {
-        alert("Falta ingresar datos");           //SI DATOS INGRESADOS ES FALSE, ALERTA DE INCOMPLETO
+
+        document.getElementById("alerta").innerHTML += 
+        `<div class="alert alert-primary alert-dismissible" role="alert" style="width: 330px;">
+        Falta ingresar datos
+      </div>`
+                   //SI DATOS INGRESADOS ES FALSE, ALERTA DE INCOMPLETO
     }
 })
 

@@ -54,14 +54,27 @@ document.addEventListener("DOMContentLoaded", function(e){
 
 let userLogged = localStorage.getItem('User-Logged');               //TRAIGO EL ELEMENTO DEL LOCAL STORAGE
 let mostrarUsuario = document.getElementById("mostrarUsuario");     // TRAIGO EL DIV QUE ESTÁ EN EL NAV
+let drop = document.getElementById("drop");
+let iniciarsesion = document.getElementById("iniciarsesion");
 
 if(userLogged) {                                                    //SI HAY DATOS INGRESADOS
-
   userLogged = JSON.parse(userLogged);                              //TRASNFORMO EL DATO A OBJETO DE JS
   mostrarUsuario.innerText = mostrarUsuario.innerText + userLogged.email;      //AGREGO EL DATO AL DIV 
   mostrarUsuario.style = "display: inline-block";             //MODIFICO EL ESTILO PARA MOSTRAR EL DATO EN NAV
-
-}
+  drop.classList.remove("d-none")
+  iniciarsesion.classList.remove("d-md-inline-block")
+  iniciarsesion.style = "display: none";
+} 
 
 });
 
+
+//CERRAR SESIÓN
+document.addEventListener("DOMContentLoaded", function() {
+
+  document.getElementById("cerrarsesion").addEventListener("click",function() {
+    localStorage.removeItem('User-Logged');
+    window.location= "index.html"
+  })
+
+});
