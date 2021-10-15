@@ -56,13 +56,6 @@ function mostrarCarrito(productos) {
         <td class="text-center"></td>
         <td id="total" class="text-center total" >${producto.currency} ${sub}</td>
       </tr>
-
-      <tr>
-        <th >Envío</th>
-        <td class="text-center"></td>
-        <td class="text-center"></td>
-        <td id="total" class="text-center total" >${producto.currency} ${sub}</td>
-      </tr>
       
                 `   
     }
