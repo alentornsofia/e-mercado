@@ -25,7 +25,7 @@ function mostrarCarrito(productos) {
       <th scope="row">Tipo de envío:</th>
       <td class="text-center"><strong>Premium</strong><br>(2-5 días)</td>
       <td class="text-center">Costo de 15% sobre el subtotal</td>
-      <td class="text-center"><input class="form-check-input" type="radio" name="envio" id="envio1">
+      <td class="text-center"><input class="form-check-input" type="radio" name="envio" id="envio1" checked>
       <label class="form-check-label" for="flexRadioDefault1"></td>
     </tr> 
     <tr>
