@@ -42,7 +42,8 @@
       <a class="py-2 d-none d-md-inline-block anav" href="sell.html">Vender</a>
       <a class="py-2 d-md-inline-block anav" href="index.html" id="iniciarsesion">Iniciar sesión</a>
       <div class="dropdown d-none" id="drop">
-        <button class="btn dropdown-toggle bg-dark botonnav " type="button" id=" dropdownMenuButton " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn dropdown-toggle bg-dark botonnav " type="button" id=" dropdownMenuButton "
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <div id="mostrarUsuario" class="py-2 d-none d-md-inline-block usuarioNav"></div>
         </button>
         <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
@@ -52,29 +53,55 @@
           <a class="dropdown-item" id="cerrarsesion" href="index.html">Cerrar sesión</a>
         </div>
       </div>
-      
-  </div>
+
+    </div>
   </nav>
 
+  <main role="main" class="pb-5">
+    <div class="text-center p-4">
 
-
-
-
-
-
-
-
-
-
-  
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 5 (Fecha de entrega: 17/10/2021) y Entrega 7 (Fecha de entrega: 14/11/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+      <h2>Carrito de compras</h2>
     </div>
-  </div>
+
+    <div class= "container carrito">
+      <div class= "col list-group-item" >
+      <table class="table">
+
+      <thead class="table-secondary text-center"> 
+      <tr>
+        <th colspan="2">Producto</th>
+        
+        <th scope="col">Cantidad</th>
+        <th scope="col">Costo</th>
+      </tr>
+    </thead>
+
+    <tbody id="carrito">
+  </tbody>
+
+  </table>
+
+</div>
+<br>
+<div class="col-4" style="float: right"><button id="botonsubmit" class="botoncarrito form-control"><strong>Comprar</strong></button></div>
+</div> 
+
+
+  </main>
+
+
+  <tr class="table-light">...</tr>
+
+
+  <footer class="text-muted bg-light">
+    <div class="container">
+      <p class="float-right">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
+      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+    </div>
+  </footer>
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>

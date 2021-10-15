@@ -166,3 +166,15 @@ a.custom-card:hover {
 .mostrar {
   display: inline-block;
 }
+
+
+.carrito {
+  width: 900px;
+}
+
+.botoncarrito {
+  background-color: #54a396; 
+  color: white;
+  border-radius: 3px;
+ 
+ }
