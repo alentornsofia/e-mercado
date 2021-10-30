@@ -57,8 +57,6 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("pemail").innerHTML = `<strong>Email</strong><br>` + datos.email
         document.getElementById("ptelefono").innerHTML =`<strong>Teléfono</strong><br>`  + datos.telefono
 
-        document.getElementById("datos").classList.remove("ocultar")
-        document.getElementById("formulario").classList.add("ocultar")
           
     }
 
