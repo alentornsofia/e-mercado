@@ -21,8 +21,46 @@ function mostrarCarrito(productos) {
           <td class="text-center" id="productosubtotal">${producto.currency} ${sub}</td>
         </tr> 
 
+
+        <tr class="table-secondary">
+        <th scope="row" >Datos de envío:</th>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+
+
+    <tr>
+        
+        <td>Dirección</td>
+        <td class="text-center"><input type=text class="form-control" placeholder="Calle"></td>
+        <td class="text-center"><input type=number class="form-control" placeholder="Número"></td>
+        <td class="text-center"> <input type=text class="form-control" placeholder="Esquina"></td>
+        
+      </tr>
       <tr>
-      <th scope="row">Tipo de envío:</th>
+        
+      <td>País</td>
+      <td class="text-center">
+      <div class="form-group">
+      <select class="form-control" id="pais">
+        <option>Uruguay</option>
+        <option>Argentina</option>
+        <option>Brasil</option>
+        <option>Bolivia</option>
+        <option>Perú</option>
+      </select>
+    </div>
+      
+    </tr>
+    <tr class="table-secondary">
+    <th scope="row" >Tipo de envío:</th>
+    <td class="text-center"></td>
+    <td class="text-center"></td>
+    <td class="text-center"></td>
+
+
+      <tr>
+      <th scope="row"></th>
       <td class="text-center"><strong>Premium</strong><br>(2-5 días)</td>
       <td class="text-center">Costo de 15% sobre el subtotal</td>
       <td class="text-center"><input class="form-check-input" type="radio" name="envio" id="envio1" checked>
@@ -42,6 +80,21 @@ function mostrarCarrito(productos) {
     <td class="text-center"><input class="form-check-input" type="radio" name="envio" id="envio3">
     <label class="form-check-label" for="flexRadioDefault1"></td>
   </tr> 
+
+  <tr class="table-secondary">
+  <th scope="row" >Método de pago:</th>
+  <td class="text-center"></td>
+  <td class="text-center"></td>
+  <td class="text-center"></td>
+
+
+  <tr>
+  <th scope="row"></th>
+  <td class="text-center"><div class="row">Transf. bancaria <input class="form-check-input" type="radio" name="pago" id="transferencia" checked></div></td>
+  
+  <td class="text-center"><div class="row">Tarjeta de crédito<input class="form-check-input" type="radio" name="pago" id="tarjeta"</div></td>
+  <td class="text-center"></td>
+</tr> 
 
 
         <tr>

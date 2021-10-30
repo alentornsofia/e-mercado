@@ -47,28 +47,43 @@ function mostrarProductos() {
         if (((minCount == undefined) || (minCount != undefined && parseInt(category.cost) >= minCount)) &&
             ((maxCount == undefined) || (maxCount != undefined && parseInt(category.cost) <= maxCount))) {
                 if (buscar == undefined || category.name.toLowerCase().indexOf(buscar) != -1){
-            htmlContentToAppend += `
-            <a onclick="guardarId(`+category.id+` )" style="cursor: pointer"> 
-            <div class= "col list-group-item list-group-item-action" >
-                    <div class="row">
-                        <div class="col-3">
-                        <img src=" `+ category.imgSrc + `" class="img-thumbnail">
-                        </div>
-                        <div class="col  list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h4 class="mb-1">`+ category.name +
-                `</h4> <small class="text-muted">` + category.soldCount + ` artículos</small>
-                                
-                            </div>
-                            <p class="mb-1">` + category.currency + ` ` + category.cost + ` </p>
-                            <p class="mb-1">` + category.description + `</p>
-                        </div>
-                       
+            htmlContentToAppend += `   
+
+                <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                  <a onclick="guardarId(`+category.id+` )" style="cursor: pointer" class="card mb-4 shadow-sm custom-card">
+                    <img class="bd-placeholder-img card-img-top"  src="`+ category.imgSrc +`">
+                    <h3 class="m-3">`+ category.name +`</h3>
+                    
+                    <div class="card-body" >
+                    <small>` + category.soldCount + ` artículos</small>
+                    <p class="card-text">` + category.description + `</p>
+                    <p class="mb-1"><strong>` + category.currency + ` ` + category.cost + ` </strong></p>
+                      
                     </div>
-                </div>
-               
-                </a>
-                `          
+                  </a>
+                </div>`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }}
     }
        
