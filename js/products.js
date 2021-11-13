@@ -64,26 +64,6 @@ function mostrarProductos() {
                 </div>`
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }}
     }
        

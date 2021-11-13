@@ -27,6 +27,72 @@
         font-size: 3.5rem;
       }
     }
+
+    .form-horizontal {
+      /* display: block; */
+      width: 100%;
+      height: calc(1.5em + 0.75rem + 2px);
+      padding: 0.375rem 0.75rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+      transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+
+    }
+
+    #inputNumero::-webkit-outer-spin-button,
+    #inputNumero::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    #inputTarjeta::-webkit-outer-spin-button,
+    #inputTarjeta::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    #inputVencimiento::-webkit-outer-spin-button,
+    #inputVencimiento::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    #inputCuenta::-webkit-outer-spin-button,
+    #inputCuenta::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    #inputCodigo::-webkit-outer-spin-button,
+    #inputCodigo::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+
+    
+.blanco {
+  color: white;
+}
+
+.estilotabla{
+  border: #e5e5e5 1px solid;
+  border-top: none;
+  border-radius: 5px;
+  
+}
+
+
+
+
+
   </style>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -58,39 +124,256 @@
   </nav>
 
   <main role="main" class="pb-5">
+    <div id="carritodecompras">
     <div class="text-center p-4">
 
       <h2>Carrito de compras</h2>
     </div>
 
-    <div class= "container carrito">
-      <div class= "col list-group-item" >
-      <table class="table ">
+    <div class="container carrito">
+      <div class="estilotabla">
 
-      <thead class="table-primary text-center"> 
-      <tr>
-        <th colspan="2">Producto</th>
-        
-        <th scope="col">Cantidad</th>
-        <th scope="col">Costo</th>
-      </tr>
-    </thead>
+        <table class="table">
 
-    <tbody id="carrito">
-  </tbody>
+          <thead class="bg-primary text-center">
+            <tr>
+              <th colspan="2" class="blanco">Producto</th>
 
-  </table>
-
-</div>
-<br>
-<div class="col-4" style="float: right"><button id="botonsubmit" class="botoncarrito form-control"><strong>Comprar</strong></button></div>
-</div> 
+              <th scope="col" class="blanco">Cantidad</th>
+              <th scope="col" class="blanco">Costo</th>
+            </tr>
+          </thead>
+          <tbody id="carrito">
+          </tbody>
+        </table>
+      </div>
+      <br>
+      <form action="" id="formulario" novalidate>
 
 
+        <!-- CALLE -->
+        <div class="container">
+          <div class="row col-12 fondo"> <h6 class="text-center text-primary"> <strong> Datos de envío</strong></h6></div>
+         
+          <hr>
+
+          <div class="row">
+            <div class="col-3">
+              <h6> <strong>Dirección</strong> </h6>
+            </div>
+            <hr>
+            <div class="col-md-3">
+              <input type="text" class="form-control formuIn" id="inputCalle" placeholder="Calle" minlength="5"
+required>
+              <div class="invalid-feedback">
+                Ingresa una calle.
+              </div>
+            </div>
+
+            <!-- NUMERO -->
+            <div class="col-md-3">
+              <input type="number" class="form-control formuIn" id="inputNumero" placeholder="N°" minlength="1" required
+                style="width: 150px">
+              <div class="invalid-feedback">
+                Ingresa un número.
+              </div>
+            </div>
+
+            <!-- ESQUINA -->
+            <div class="col-md-3">
+              <input type="text" class="form-control formuIn" id="inputEsquina" placeholder="Esquina" minlength="5"
+                required>
+              <div class="invalid-feedback">
+                Ingresa una esquina.
+              </div>
+            </div>
+          </div>
+
+
+          <hr>
+          <div class="row">
+            <div class="col-md-3">
+              <h6> <strong> País </strong></h6>
+            </div>
+            <!-- PAIS -->
+            <div class="col-md-4">
+
+              <select class="form-control" id="selectPais">
+                <option>Uruguay</option>
+                <option>Argentina</option>
+                <option>Brasil</option>
+                <option>Bolivia</option>
+                <option>Perú</option>
+              </select>
+            </div>
+          </div>
+          <hr>
+
+          <!-- ENVIO-->
+          <div class="row col-12 fondo"> <h6 class="text-center text-primary"> <strong> Tipo de envío</strong></h6></div>
+         
+              <hr>
+          <div class="row">
+          
+              
+            <div class="col-3"></div>
+            <div class="col-4">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="premium" name="envio" class="custom-control-input" required
+                  onchange="calcularEnvio()" value="115">
+                <label class="custom-control-label" for="premium"> <strong>Envío premium</strong></label>
+              </div>
+            </div>
+            <p class="col-4">(2-5 días) - Costo del 15% sobre el subtotal.</p>
+          </div>
+          <hr>
+
+
+          <div class="row">
+            <div class="col-3"></div>
+            <div class="col-4">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="express" name="envio" class="custom-control-input" required
+                  onchange="calcularEnvio()" value="107">
+                <label class="custom-control-label" for="express"> <strong>Envío Express</strong></label>
+              </div>
+            </div>
+            <p class="col-4"> (5-8 días) - Costo del 7% sobre el subtotal.</p>
+          </div>
+          <hr>
+
+          <div class="row">
+            <div class="col-3"></div>
+            <div class="col-4">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="standard" name="envio" class="custom-control-input" required
+                  onchange="calcularEnvio()" value="105">
+                <label class="custom-control-label" for="standard"> <strong>Envío Standard</strong></label>
+              </div>
+            </div>
+            <p class="col-4"> (12 a 15 días) - Costo del 5% sobre el subtotal.</p>
+          </div>
+          <hr>
+
+
+
+
+          <!-- Button trigger modal -->
+          <div class="row">
+            <div class="col-3">
+              <h6 class="text-primary"><strong>Método de pago</strong></h6>
+            </div>
+            <div class="col-3">
+              <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" id="botonm">
+                Seleccionar
+              </button>
+            </div>
+            <div class="col-md-3">
+              <input type="text" class="form-control formuIn" id="botonpago" style="border:white;" style="width: 0%;"
+                style="height: 0%;" style="display: none;">
+              <div class="invalid-feedback">
+                Selecciona un método de pago.
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Selecciona un método de pago</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="tarjeta" name="pago" class="custom-control-input">
+                    <label class="custom-control-label" for="tarjeta"> <strong>Tarjeta de crédito</strong></label>
+                  </div><br><br>
+                  <input type=number class="form-control" placeholder="Número de tarjeta" id="inputTarjeta">
+                  <small>El número de tarjeta contiene 16 dígitos</small><br><br>
+                  <input type=number class="form-control" placeholder="Cód de seguridad" id="inputCodigo"
+                    style="width: 180px;">
+                  <small>El código de seguridad contiene 3 dígitos</small><br><br>
+                  <input type=text class="form-control" placeholder="Vencimiento" id="inputVencimiento"
+                    style="width:120px;">
+                  <small>La fecha de vencimiento contiene 4 dígitos</small>
+                  <hr><br>
+
+
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="transferencia" name="pago" class="custom-control-input">
+                    <label class="custom-control-label" for="transferencia"> <strong>Transferencia
+                        bancaria</strong></label>
+                  </div><br><br>
+
+
+                  <input type=number class="form-control" placeholder="N° de cuenta" id="inputCuenta">
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- SUBTOTAL -->
+
+          <hr>
+
+          <div class="row">
+            <div class="col-8"></div>
+            <div class="col-3">
+              <h6 class="text-primary"><strong>Subtotal</strong></h6>
+
+            </div>
+
+            <strong>
+              <p>$</p>
+            </strong>
+            <strong>
+              <div id="subtotal">
+              </div>
+            </strong>
+          </div>
+
+          <!-- TOTAL -->
+
+
+
+          <div class="row">
+            <div class="col-8"></div>
+            <div class="col-3">
+              <h6 class="text-primary"><strong>Total</strong></h6>
+
+            </div>
+
+            <strong>
+              <p>$</p>
+            </strong><strong>
+              <div id="total">
+              </div>
+            </strong>
+          </div>
+<div class="row"></div>
+<div class="col-9"></div>
+          <div class="col-3" style="float: right"> <button class="btn btn-primary mt-3" type="submit" style="width: 180px;">Comprar</button>
+          </div>
+        </div>
+    
+      </form>
+    </div>
   </main>
 
-
-  <tr class="table-light">...</tr>
 
 
   <footer class="text-muted bg-light">
